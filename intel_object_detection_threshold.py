@@ -26,7 +26,7 @@ if not Path(model_path).exists():
 model = torch.hub.load('ultralytics/yolov5', 'custom', path=model_path, force_reload=True)
 
 # Load an image
-img_path = 'stitched_image_output.png'
+img_path = 'saved_images/output/stitched_image_output.png'
 if not Path(img_path).exists():
     raise FileNotFoundError(f"Image file not found at {img_path}")
 
