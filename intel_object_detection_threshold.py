@@ -14,7 +14,7 @@ from pathlib import Path
 import cv2
 from google.colab import drive
 import numpy as np
-
+import time
 
 model_path = 'best.pt'  # Model
 
@@ -85,7 +85,7 @@ def resize_image(image, width, height):
     return cv2.resize(image, (width, height), interpolation=cv2.INTER_AREA)
 
 # Assuming you have `displayed_image_np` from your previous code
-#displayed_image_np = []  # Placeholder for your list of images
+# displayed_image_np = []  # Placeholder for your list of images
 
 # Define threshold value (adjust as needed)
 threshold_value = 150
@@ -96,6 +96,9 @@ output_height = 512
 
 # Apply thresholding, resize and save each displayed image
 for i, img_np in enumerate(displayed_image_np):
+    # Start timing
+    start_time = time.time()
+
     # Apply thresholding
     thresholded_img = apply_threshold(img_np, threshold_value)
 
@@ -105,7 +108,14 @@ for i, img_np in enumerate(displayed_image_np):
     # Save as .pgm file
     output_image_path = f'output_image_{i}_thresholded.pgm'
     cv2.imwrite(output_image_path, resized_img)
-    print(f"Thresholded image saved locally as {output_image_path}")
+
+    # End timing
+    end_time = time.time()
+
+    # Calculate elapsed time
+    elapsed_time = end_time - start_time
+    print(f"Thresholded image saved locally as {output_image_path} in {elapsed_time:.4f} seconds")
 
 print("All images have been processed and saved.")
+
 
